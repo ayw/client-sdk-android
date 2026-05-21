@@ -2,545 +2,543 @@
 
 ## 2.25.3
 
-### Patch Changes
+### 补丁变更
 
-- docs(audio): clarify that `AudioSwitchHandler.selectDevice()` is sticky and overrides `preferredDeviceList`. Document that callers who only need a different priority order should set `preferredDeviceList` instead, and that `selectDevice(null)` clears a sticky selection. - [#941](https://github.com/livekit/client-sdk-android/pull/941) ([@daxiondi](https://github.com/daxiondi))
+- docs(audio): 阐明 `AudioSwitchHandler.selectDevice()` 是粘性的，会覆盖 `preferredDeviceList`。文档中说明：仅需调整优先级顺序的调用者应改为设置 `preferredDeviceList`，而调用 `selectDevice(null)` 则可以清除粘性选择。 - [#941](https://github.com/livekit/client-sdk-android/pull/941) ([@daxiondi](https://github.com/daxiondi))
 
-- Update libwebrtc to 144.7559.05 - [#936](https://github.com/livekit/client-sdk-android/pull/936) ([@davidliu](https://github.com/davidliu))
+- 将 libwebrtc 更新至 144.7559.05 - [#936](https://github.com/livekit/client-sdk-android/pull/936) ([@davidliu](https://github.com/davidliu))
 
-- fix: resume joinContinuation when LEAVE received during reconnect handshake to avoid reconnection loop hanging issue - [#934](https://github.com/livekit/client-sdk-android/pull/934) ([@YashJainSC](https://github.com/YashJainSC))
+- fix: 在重连握手期间收到 LEAVE 时恢复 joinContinuation，以避免重连循环挂起的问题 - [#934](https://github.com/livekit/client-sdk-android/pull/934) ([@YashJainSC](https://github.com/YashJainSC))
 
-- Fixed silent loss of reliable data when DataChannel.send returned false and when buffered items were replayed across multiple resumes. - [#921](https://github.com/livekit/client-sdk-android/pull/921) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复了当 DataChannel.send 返回 false 以及缓冲项在多次恢复中重放时，可靠数据静默丢失的问题。 - [#921](https://github.com/livekit/client-sdk-android/pull/921) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Fix byte streams not sending the name of the bytestream - [#939](https://github.com/livekit/client-sdk-android/pull/939) ([@davidliu](https://github.com/davidliu))
+- 修复字节流未发送字节流名称的问题 - [#939](https://github.com/livekit/client-sdk-android/pull/939) ([@davidliu](https://github.com/davidliu))
 
-- Update AudioSwitch to handle potential exception when unregistering audio device listeners - [#944](https://github.com/livekit/client-sdk-android/pull/944) ([@davidliu](https://github.com/davidliu))
+- 更新 AudioSwitch 以处理注销音频设备监听器时可能出现的异常 - [#944](https://github.com/livekit/client-sdk-android/pull/944) ([@davidliu](https://github.com/davidliu))
 
 ## 2.25.2
 
-### Patch Changes
+### 补丁变更
 
-- Fix Room.connect not properly throwing ConnectException for websocket connection failures during Room.join() - [#926](https://github.com/livekit/client-sdk-android/pull/926) ([@davidliu](https://github.com/davidliu))
+- 修复 Room.connect 在 Room.join() 过程中遇到 WebSocket 连接失败时未正确抛出 ConnectException 的问题 - [#926](https://github.com/livekit/client-sdk-android/pull/926) ([@davidliu](https://github.com/davidliu))
 
-- Fix reconnect potentially getting cancelled by websocket failure - [#926](https://github.com/livekit/client-sdk-android/pull/926) ([@davidliu](https://github.com/davidliu))
+- 修复重连可能因 WebSocket 失败而被取消的问题 - [#926](https://github.com/livekit/client-sdk-android/pull/926) ([@davidliu](https://github.com/davidliu))
 
-- Fixed RTCEngine.addTrack leaking pendingTrackResolvers entries on timeout or caller cancellation, which previously caused subsequent publishes of the same track to fail with DuplicateTrackException until the connection was torn down. - [#920](https://github.com/livekit/client-sdk-android/pull/920) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复了 RTCEngine.addTrack 在超时或调用方取消时泄漏 `pendingTrackResolvers` 条目的问题，此前这会导致同一轨道的后续发布因 `DuplicateTrackException` 而失败，直到连接被断开。 - [#920](https://github.com/livekit/client-sdk-android/pull/920) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Fix exception when resending data channel messages after a resume - [#923](https://github.com/livekit/client-sdk-android/pull/923) ([@davidliu](https://github.com/davidliu))
+- 修复恢复后重新发送数据通道消息时出现的异常 - [#923](https://github.com/livekit/client-sdk-android/pull/923) ([@davidliu](https://github.com/davidliu))
 
 ## 2.25.1
 
-### Patch Changes
+### 补丁变更
 
-- Add convenience constructor to E2EEOptions for shared key encryption - [#917](https://github.com/livekit/client-sdk-android/pull/917) ([@davidliu](https://github.com/davidliu))
+- 为共享密钥加密向 E2EEOptions 添加便捷构造函数 - [#917](https://github.com/livekit/client-sdk-android/pull/917) ([@davidliu](https://github.com/davidliu))
 
 ## 2.25.0
 
-### Minor Changes
+### 次要变更
 
-- AudioOptions: Added disableAudioPrewarming flag - [#912](https://github.com/livekit/client-sdk-android/pull/912) ([@davidliu](https://github.com/davidliu))
+- AudioOptions: 添加 `disableAudioPrewarming` 标志 - [#912](https://github.com/livekit/client-sdk-android/pull/912) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- Fix potential leak for StreamSender caused by exceptions - [#913](https://github.com/livekit/client-sdk-android/pull/913) ([@davidliu](https://github.com/davidliu))
+- 修复 StreamSender 因异常导致的潜在泄漏 - [#913](https://github.com/livekit/client-sdk-android/pull/913) ([@davidliu](https://github.com/davidliu))
 
-- Update audio handling to use AudioManager communication device APIs on S and above - [#910](https://github.com/livekit/client-sdk-android/pull/910) ([@davidliu](https://github.com/davidliu))
+- 更新音频处理，在 Android S 及以上版本使用 AudioManager 通信设备 API - [#910](https://github.com/livekit/client-sdk-android/pull/910) ([@davidliu](https://github.com/davidliu))
 
-- Rethrow cancellation exceptions for coroutines - [#913](https://github.com/livekit/client-sdk-android/pull/913) ([@davidliu](https://github.com/davidliu))
+- 对协程重新抛出取消异常 - [#913](https://github.com/livekit/client-sdk-android/pull/913) ([@davidliu](https://github.com/davidliu))
 
-- Implement changing preferred audio device list on AudioSwitchHandler mid-call - [#910](https://github.com/livekit/client-sdk-android/pull/910) ([@davidliu](https://github.com/davidliu))
+- 实现通话中动态更改 `AudioSwitchHandler` 的首选音频设备列表 - [#910](https://github.com/livekit/client-sdk-android/pull/910) ([@davidliu](https://github.com/davidliu))
 
 ## 2.24.1
 
-### Patch Changes
+### 补丁变更
 
-- Fix LocalParticipant.publishData throwing exception for packets over 15KB - [#902](https://github.com/livekit/client-sdk-android/pull/902) ([@xianshijing-lk](https://github.com/xianshijing-lk))
+- 修复 LocalParticipant.publishData 在发送超过 15KB 的数据包时抛出异常的问题 - [#902](https://github.com/livekit/client-sdk-android/pull/902) ([@xianshijing-lk](https://github.com/xianshijing-lk))
 
 ## 2.24.0
 
-### Minor Changes
+### 次要变更
 
-- Add setting custom reconnect policy - [#894](https://github.com/livekit/client-sdk-android/pull/894) ([@davidliu](https://github.com/davidliu))
+- 添加设置自定义重连策略的功能 - [#894](https://github.com/livekit/client-sdk-android/pull/894) ([@davidliu](https://github.com/davidliu))
 
-- Update libwebrtc to m144 - [#886](https://github.com/livekit/client-sdk-android/pull/886) ([@davidliu](https://github.com/davidliu))
+- 将 libwebrtc 更新至 m144 - [#886](https://github.com/livekit/client-sdk-android/pull/886) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- Fix resume not working sometimes after connection loss/gain - [#894](https://github.com/livekit/client-sdk-android/pull/894) ([@davidliu](https://github.com/davidliu))
+- 修复连接断开/恢复后有时重连不生效的问题 - [#894](https://github.com/livekit/client-sdk-android/pull/894) ([@davidliu](https://github.com/davidliu))
 
-- Fix transcription attributes not converting correctly - [#889](https://github.com/livekit/client-sdk-android/pull/889) ([@davidliu](https://github.com/davidliu))
+- 修复转录属性未正确转换的问题 - [#889](https://github.com/livekit/client-sdk-android/pull/889) ([@davidliu](https://github.com/davidliu))
 
-- Specifically keep native libwebrtc methods from being obfuscated - [#893](https://github.com/livekit/client-sdk-android/pull/893) ([@davidliu](https://github.com/davidliu))
+- 专门保留原生 libwebrtc 方法不被混淆 - [#893](https://github.com/livekit/client-sdk-android/pull/893) ([@davidliu](https://github.com/davidliu))
 
-- Properly cancel jobs awaiting on DataChannel low buffer instead of completing on dispose - [#897](https://github.com/livekit/client-sdk-android/pull/897) ([@davidliu](https://github.com/davidliu))
+- 正确处理在 DataChannel 低缓冲时等待的 job，在 dispose 时取消而不是完成 - [#897](https://github.com/livekit/client-sdk-android/pull/897) ([@davidliu](https://github.com/davidliu))
 
-- Fix exception not being caught when using LocalParticipant.publishData - [#897](https://github.com/livekit/client-sdk-android/pull/897) ([@davidliu](https://github.com/davidliu))
+- 修复使用 LocalParticipant.publishData 时未捕获的异常 - [#897](https://github.com/livekit/client-sdk-android/pull/897) ([@davidliu](https://github.com/davidliu))
 
 ## 2.23.5
 
-### Patch Changes
+### 补丁变更
 
-- Fix not detecting server supported video codecs correctly - [#876](https://github.com/livekit/client-sdk-android/pull/876) ([@davidliu](https://github.com/davidliu))
+- 修复未正确检测服务端支持的视频编解码器的问题 - [#876](https://github.com/livekit/client-sdk-android/pull/876) ([@davidliu](https://github.com/davidliu))
 
-- Remove Timber from dependencies - [#874](https://github.com/livekit/client-sdk-android/pull/874) ([@davidliu](https://github.com/davidliu))
+- 从依赖中移除 Timber - [#874](https://github.com/livekit/client-sdk-android/pull/874) ([@davidliu](https://github.com/davidliu))
 
 ## 2.23.4
 
-### Patch Changes
+### 补丁变更
 
-- Make selfie segmenter work better - [#861](https://github.com/livekit/client-sdk-android/pull/861) ([@Deneath](https://github.com/Deneath))
+- 改善自拍分割器效果 - [#861](https://github.com/livekit/client-sdk-android/pull/861) ([@Deneath](https://github.com/Deneath))
 
-- Ensure child jobs are cleaned up on ICE reconnect timeout - [#870](https://github.com/livekit/client-sdk-android/pull/870) ([@davidliu](https://github.com/davidliu))
+- 确保 ICE 重连超时时清理子 job - [#870](https://github.com/livekit/client-sdk-android/pull/870) ([@davidliu](https://github.com/davidliu))
 
-- Cancel websocket when join coroutine is cancelled - [#871](https://github.com/livekit/client-sdk-android/pull/871) ([@davidliu](https://github.com/davidliu))
+- 当 join 协程被取消时取消 WebSocket - [#871](https://github.com/livekit/client-sdk-android/pull/871) ([@davidliu](https://github.com/davidliu))
 
-- Concurrency fixes for SignalClient connection - [#871](https://github.com/livekit/client-sdk-android/pull/871) ([@davidliu](https://github.com/davidliu))
+- SignalClient 连接的并发修复 - [#871](https://github.com/livekit/client-sdk-android/pull/871) ([@davidliu](https://github.com/davidliu))
 
 ## 2.23.3
 
-### Patch Changes
+### 补丁变更
 
-- Optimised connection params building - [#852](https://github.com/livekit/client-sdk-android/pull/852) ([@pulakdp](https://github.com/pulakdp))
+- 优化连接参数构建 - [#852](https://github.com/livekit/client-sdk-android/pull/852) ([@pulakdp](https://github.com/pulakdp))
 
-- Fixed ScreenCaptureConnection suspending forever when bindService fails and crashing when resuming canceled continuations. - [#838](https://github.com/livekit/client-sdk-android/pull/838) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复了 ScreenCaptureConnection 在 bindService 失败时无限挂起以及在恢复已取消的 continuation 时崩溃的问题。 - [#838](https://github.com/livekit/client-sdk-android/pull/838) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Migrate from Klaxon decoding to kotlinx-serialization for AgentAttribute deserialization - [#851](https://github.com/livekit/client-sdk-android/pull/851) ([@davidliu](https://github.com/davidliu))
+- 将 AgentAttribute 反序列化从 Klaxon 迁移至 kotlinx-serialization - [#851](https://github.com/livekit/client-sdk-android/pull/851) ([@davidliu](https://github.com/davidliu))
 
-- perf: Skip Klaxon parsing for empty agent attribute maps - [#849](https://github.com/livekit/client-sdk-android/pull/849) ([@YashJainSC](https://github.com/YashJainSC))
+- perf: 对空的 agent attribute 映射跳过 Klaxon 解析 - [#849](https://github.com/livekit/client-sdk-android/pull/849) ([@YashJainSC](https://github.com/YashJainSC))
 
 ## 2.23.2
 
-### Patch Changes
+### 补丁变更
 
-- Fix exception when parsing AgentAttribute inputs and outputs - [#847](https://github.com/livekit/client-sdk-android/pull/847) ([@davidliu](https://github.com/davidliu))
+- 修复解析 AgentAttribute 的 inputs 和 outputs 时出现的异常 - [#847](https://github.com/livekit/client-sdk-android/pull/847) ([@davidliu](https://github.com/davidliu))
 
-- Properly reset network callback manager after disconnect - [#841](https://github.com/livekit/client-sdk-android/pull/841) ([@davidliu](https://github.com/davidliu))
+- 断连后正确重置网络回调管理器 - [#841](https://github.com/livekit/client-sdk-android/pull/841) ([@davidliu](https://github.com/davidliu))
 
-- Fixed audio focus not being abandoned on pre-O devices due to mismatched listener instance. - [#837](https://github.com/livekit/client-sdk-android/pull/837) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复了 pre-O 设备上因监听器实例不匹配导致音频焦点未被释放的问题。 - [#837](https://github.com/livekit/client-sdk-android/pull/837) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Fixed file descriptor leak in ByteStreamSender where Source was not closed after reading. - [#839](https://github.com/livekit/client-sdk-android/pull/839) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复了 ByteStreamSender 中读取后未关闭 Source 导致的文件描述符泄漏。 - [#839](https://github.com/livekit/client-sdk-android/pull/839) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Fixed data race in `CameraEventsDispatchHandler` by using `CopyOnWriteArraySet` for thread-safe iteration. - [#822](https://github.com/livekit/client-sdk-android/pull/822) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 通过使用 `CopyOnWriteArraySet` 实现线程安全迭代，修复了 `CameraEventsDispatchHandler` 中的数据竞争问题。 - [#822](https://github.com/livekit/client-sdk-android/pull/822) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Fixed Room getting stuck in CONNECTING state after failed connect attempts. - [#836](https://github.com/livekit/client-sdk-android/pull/836) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复了 Room 在连接尝试失败后陷入 CONNECTING 状态的问题。 - [#836](https://github.com/livekit/client-sdk-android/pull/836) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Fix thread visibility issues in SignalClient that could cause messages to be silently dropped. - [#819](https://github.com/livekit/client-sdk-android/pull/819) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复 SignalClient 中可能导致消息静默丢弃的线程可见性问题。 - [#819](https://github.com/livekit/client-sdk-android/pull/819) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Fix race condition when sending sync state before tracks are subscribed - [#831](https://github.com/livekit/client-sdk-android/pull/831) ([@davidliu](https://github.com/davidliu))
+- 修复轨道订阅之前发送同步状态的竞态条件 - [#831](https://github.com/livekit/client-sdk-android/pull/831) ([@davidliu](https://github.com/davidliu))
 
-- Don't throw on invalid values for Agent enum types - [#847](https://github.com/livekit/client-sdk-android/pull/847) ([@davidliu](https://github.com/davidliu))
+- 对于无效的 Agent 枚举类型值不再抛出异常 - [#847](https://github.com/livekit/client-sdk-android/pull/847) ([@davidliu](https://github.com/davidliu))
 
-- Add overload for TokenSource.fromEndpoint that accepts a string for the url - [#844](https://github.com/livekit/client-sdk-android/pull/844) ([@davidliu](https://github.com/davidliu))
+- 为 TokenSource.fromEndpoint 添加接受字符串 URL 的重载 - [#844](https://github.com/livekit/client-sdk-android/pull/844) ([@davidliu](https://github.com/davidliu))
 
-- Fixed screen sharing with VP9/AV1 codecs - [#828](https://github.com/livekit/client-sdk-android/pull/828) ([@pblazej](https://github.com/pblazej))
+- 修复了使用 VP9/AV1 编解码器时的屏幕共享问题 - [#828](https://github.com/livekit/client-sdk-android/pull/828) ([@pblazej](https://github.com/pblazej))
 
-- Proguard rule optimizations - [#803](https://github.com/livekit/client-sdk-android/pull/803) ([@davidliu](https://github.com/davidliu))
+- ProGuard 规则优化 - [#803](https://github.com/livekit/client-sdk-android/pull/803) ([@davidliu](https://github.com/davidliu))
 
 ## 2.23.1
 
-### Patch Changes
+### 补丁变更
 
-- Fixed non-local return in `onConnectionQuality` that caused lost connection quality updates for remaining participants when one participant was not found in the list. - [#817](https://github.com/livekit/client-sdk-android/pull/817) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复了 `onConnectionQuality` 中的非局部返回，当一个参与者在列表中未找到时，会导致其他参与者的连接质量更新丢失。 - [#817](https://github.com/livekit/client-sdk-android/pull/817) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Fixed impossible empty streams check in Room.onAddTrack that could crash if WebRTC called onAddTrack with an empty streams array. - [#816](https://github.com/livekit/client-sdk-android/pull/816) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复了 Room.onAddTrack 中不可能出现的空流检查，当 WebRTC 以空流数组调用 `onAddTrack` 时可能崩溃。 - [#816](https://github.com/livekit/client-sdk-android/pull/816) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Improve thread-safety and reconnection reliability for hasPublished flag. - [#814](https://github.com/livekit/client-sdk-android/pull/814) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 改进 `hasPublished` 标志的线程安全性和重连可靠性。 - [#814](https://github.com/livekit/client-sdk-android/pull/814) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Fixed `ConcurrentModificationException` in `LocalAudioTrack.dispose()` when sinks are registered. - [#820](https://github.com/livekit/client-sdk-android/pull/820) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复了当有 sink 注册时，`LocalAudioTrack.dispose()` 中的 `ConcurrentModificationException`。 - [#820](https://github.com/livekit/client-sdk-android/pull/820) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Fix LocalParticipant jobs map clean-up when unpublishing tracks. - [#807](https://github.com/livekit/client-sdk-android/pull/807) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复取消发布轨道时 LocalParticipant 的 jobs map 清理问题。 - [#807](https://github.com/livekit/client-sdk-android/pull/807) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Fixed PeerConnectionTransport coroutine scope not being cancelled on close. - [#818](https://github.com/livekit/client-sdk-android/pull/818) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复了 PeerConnectionTransport 协程作用域在关闭时未被取消的问题。 - [#818](https://github.com/livekit/client-sdk-android/pull/818) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Improve reconnection reliability by hardening state flags and synchronizing data channel receive state. - [#806](https://github.com/livekit/client-sdk-android/pull/806) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 通过加固状态标志和同步数据通道接收状态来提高重连可靠性。 - [#806](https://github.com/livekit/client-sdk-android/pull/806) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Remove reference to internal OkHttp method - [#811](https://github.com/livekit/client-sdk-android/pull/811) ([@davidliu](https://github.com/davidliu))
+- 移除对 OkHttp 内部方法的引用 - [#811](https://github.com/livekit/client-sdk-android/pull/811) ([@davidliu](https://github.com/davidliu))
 
-- Increase RTC negotiation reliability by dropping outdated sdp answers and forwarding offer ids - [#813](https://github.com/livekit/client-sdk-android/pull/813) ([@davidliu](https://github.com/davidliu))
+- 通过丢弃过期的 SDP 应答和转发 offer ID 来提高 RTC 协商可靠性 - [#813](https://github.com/livekit/client-sdk-android/pull/813) ([@davidliu](https://github.com/davidliu))
 
-- Fixed ProGuard/R8 minification crash in release builds when using AgentAttributes. Added @Keep annotations to Klaxon-based data classes and updated ProGuard rules to prevent obfuscation of reflection-based JSON parsing classes. #808 - [#809](https://github.com/livekit/client-sdk-android/pull/809) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复了在发布构建中使用 AgentAttributes 时的 ProGuard/R8 混淆崩溃。为基于 Klaxon 的数据类添加了 `@Keep` 注解，并更新 ProGuard 规则以防止混淆基于反射的 JSON 解析类。#808 - [#809](https://github.com/livekit/client-sdk-android/pull/809) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
-- Update WebRTC-SDK to 137.7151.05. - [#824](https://github.com/livekit/client-sdk-android/pull/824) ([@davidliu](https://github.com/davidliu))
+- 将 WebRTC-SDK 更新至 137.7151.05。 - [#824](https://github.com/livekit/client-sdk-android/pull/824) ([@davidliu](https://github.com/davidliu))
 
-  - Fixes echo cancellation and noise suppression failing to enable.
-  - Fixes microphone not shutting off when muted.
+  - 修复回声消除和噪声抑制无法启用的问题。
+  - 修复静音时麦克风未关闭的问题。
 
 ## 2.23.0
 
-### Minor Changes
+### 次要变更
 
-- Change TokenSource.fetch methods to return Result<TokenSourceResponse> to explicitly handle exceptions - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
+- 将 TokenSource.fetch 方法改为返回 `Result<TokenSourceResponse>` 以显式处理异常 - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
 
-- Add support for multiple listeners on AudioSwitchHandler - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
+- 添加 AudioSwitchHandler 的多监听器支持 - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
 
-- Rename AgentState to AgentSdkState - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
+- 将 AgentState 重命名为 AgentSdkState - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
 
-- Deprecate Room.withPreconnectAudio method. - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
+- 废弃 `Room.withPreconnectAudio` 方法。 - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
 
-  - Set AudioTrackPublishDefaults.preconnect = true on the RoomOptions instead to use the preconnect buffer.
+  - 改为在 RoomOptions 中设置 `AudioTrackPublishDefaults.preconnect = true` 来使用预连接缓冲。
 
-- Expose agentAttributes as a value on Participant - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
+- 将 `agentAttributes` 作为 Participant 的值暴露 - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
 
-- Expose the server info of the currently connected server on Room - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
+- 在 Room 上暴露当前连接服务器的服务端信息 - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- Fix crash when cleaning up local participant - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
+- 修复清理本地参与者时的崩溃 - [#802](https://github.com/livekit/client-sdk-android/pull/802) ([@davidliu](https://github.com/davidliu))
 
-- Fix crash when creating audio track for communication mode workaround - [#805](https://github.com/livekit/client-sdk-android/pull/805) ([@davidliu](https://github.com/davidliu))
+- 修复为通信模式变通方案创建音频轨道时的崩溃 - [#805](https://github.com/livekit/client-sdk-android/pull/805) ([@davidliu](https://github.com/davidliu))
 
 ## 2.22.1
 
-### Patch Changes
+### 补丁变更
 
-- Fixed camera indicator remaining on after network disconnection by disposing orphaned tracks from failed reconnection attempts (#296) - [#798](https://github.com/livekit/client-sdk-android/pull/798) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复网络断开后摄像头指示灯仍然保持开启的问题，通过释放重连失败尝试产生的孤立轨道（#296） - [#798](https://github.com/livekit/client-sdk-android/pull/798) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
 ## 2.22.0
 
-### Minor Changes
+### 次要变更
 
-- Extract CameraXProvider and expose it. - [#754](https://github.com/livekit/client-sdk-android/pull/754) ([@KasemJaffer](https://github.com/KasemJaffer))
+- 提取 CameraXProvider 并对外暴露。 - [#754](https://github.com/livekit/client-sdk-android/pull/754) ([@KasemJaffer](https://github.com/KasemJaffer))
 
-### Patch Changes
+### 补丁变更
 
-- Fix camera lookup to check physicalId - [#792](https://github.com/livekit/client-sdk-android/pull/792) ([@KasemJaffer](https://github.com/KasemJaffer))
+- 修复摄像头查找需要检查 physicalId 的问题 - [#792](https://github.com/livekit/client-sdk-android/pull/792) ([@KasemJaffer](https://github.com/KasemJaffer))
 
 ## 2.21.1
 
-### Patch Changes
+### 补丁变更
 
-- #721 Fixed publisher negotiation race condition causing ICE timeouts. - [#789](https://github.com/livekit/client-sdk-android/pull/789) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- #721 修复发布者协商竞态条件导致 ICE 超时的问题。 - [#789](https://github.com/livekit/client-sdk-android/pull/789) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
 ## 2.21.0
 
-### Minor Changes
+### 次要变更
 
-- End to end encryption for data channels option - [#762](https://github.com/livekit/client-sdk-android/pull/762) ([@davidliu](https://github.com/davidliu))
+- 数据通道端到端加密选项 - [#762](https://github.com/livekit/client-sdk-android/pull/762) ([@davidliu](https://github.com/davidliu))
 
-  - Added EncryptionType fields to DataReceived events and StreamInfo objects to indicate the
-    encryption status.
+  - 向 DataReceived 事件和 StreamInfo 对象添加了 EncryptionType 字段，用于指示加密状态。
 
-- Add TokenSource implementation for use with token servers - [#769](https://github.com/livekit/client-sdk-android/pull/769) ([@davidliu](https://github.com/davidliu))
+- 添加 TokenSource 实现，用于与 Token 服务器配合使用 - [#769](https://github.com/livekit/client-sdk-android/pull/769) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- Increase RPC method max roundtrip time to 7s - [#775](https://github.com/livekit/client-sdk-android/pull/775) ([@davidliu](https://github.com/davidliu))
+- 将 RPC 方法最大往返时间提高到 7 秒 - [#775](https://github.com/livekit/client-sdk-android/pull/775) ([@davidliu](https://github.com/davidliu))
 
 ## 2.20.3
 
-### Patch Changes
+### 补丁变更
 
-- Switch to using header based auth bearer token - [#770](https://github.com/livekit/client-sdk-android/pull/770) ([@davidliu](https://github.com/davidliu))
+- 切换到基于 Header 的 Bearer Token 认证 - [#770](https://github.com/livekit/client-sdk-android/pull/770) ([@davidliu](https://github.com/davidliu))
 
 ## 2.20.2
 
-### Patch Changes
+### 补丁变更
 
-- Remove unneeded suspend modifier from registerRpcMethod - [#757](https://github.com/livekit/client-sdk-android/pull/757) ([@davidliu](https://github.com/davidliu))
+- 移除 registerRpcMethod 上不必要的 suspend 修饰符 - [#757](https://github.com/livekit/client-sdk-android/pull/757) ([@davidliu](https://github.com/davidliu))
 
-- Fix crash when publishing disposed tracks - [#758](https://github.com/livekit/client-sdk-android/pull/758) ([@davidliu](https://github.com/davidliu))
+- 修复发布已释放轨道时的崩溃 - [#758](https://github.com/livekit/client-sdk-android/pull/758) ([@davidliu](https://github.com/davidliu))
 
-- Fix race condition when releasing Room object - [#756](https://github.com/livekit/client-sdk-android/pull/756) ([@davidliu](https://github.com/davidliu))
+- 修复释放 Room 对象时的竞态条件 - [#756](https://github.com/livekit/client-sdk-android/pull/756) ([@davidliu](https://github.com/davidliu))
 
-- Fix VirtualBackgroundVideoProcessor not responding to changes in backgroundImage - [#752](https://github.com/livekit/client-sdk-android/pull/752) ([@davidliu](https://github.com/davidliu))
+- 修复 VirtualBackgroundVideoProcessor 未响应 backgroundImage 变化 - [#752](https://github.com/livekit/client-sdk-android/pull/752) ([@davidliu](https://github.com/davidliu))
 
-- Ensure room is disconnected before releasing resources - [#756](https://github.com/livekit/client-sdk-android/pull/756) ([@davidliu](https://github.com/davidliu))
+- 确保 Room 在释放资源前已断开连接 - [#756](https://github.com/livekit/client-sdk-android/pull/756) ([@davidliu](https://github.com/davidliu))
 
 ## 2.20.1
 
-### Patch Changes
+### 补丁变更
 
-- Fix crash caused by extra simulcast layers equal to original resolution - [#749](https://github.com/livekit/client-sdk-android/pull/749) ([@davidliu](https://github.com/davidliu))
+- 修复额外 simulcast 层分辨率与原始分辨率相同时导致的崩溃 - [#749](https://github.com/livekit/client-sdk-android/pull/749) ([@davidliu](https://github.com/davidliu))
 
-- Wrap exceptions thrown in sendText and sendFile into Result - [#749](https://github.com/livekit/client-sdk-android/pull/749) ([@davidliu](https://github.com/davidliu))
+- 将 sendText 和 sendFile 中抛出的异常包装为 Result - [#749](https://github.com/livekit/client-sdk-android/pull/749) ([@davidliu](https://github.com/davidliu))
 
 ## 2.20.0
 
-### Minor Changes
+### 次要变更
 
-- Update libwebrtc to 137.7151.03 - [#742](https://github.com/livekit/client-sdk-android/pull/742) ([@davidliu](https://github.com/davidliu))
+- 将 libwebrtc 更新至 137.7151.03 - [#742](https://github.com/livekit/client-sdk-android/pull/742) ([@davidliu](https://github.com/davidliu))
 
-- Return streamInfo from datastream send helper methods - [#741](https://github.com/livekit/client-sdk-android/pull/741) ([@davidliu](https://github.com/davidliu))
+- DataStream 发送辅助方法返回 streamInfo - [#741](https://github.com/livekit/client-sdk-android/pull/741) ([@davidliu](https://github.com/davidliu))
 
-- Add simulcastLayers to VideoTrackPublishOptions for directly specifying the resolutions to use - [#746](https://github.com/livekit/client-sdk-android/pull/746) ([@davidliu](https://github.com/davidliu))
+- 向 VideoTrackPublishOptions 添加 `simulcastLayers`，用于直接指定要使用的分辨率 - [#746](https://github.com/livekit/client-sdk-android/pull/746) ([@davidliu](https://github.com/davidliu))
 
-- Add H265 as a supported codec - [#742](https://github.com/livekit/client-sdk-android/pull/742) ([@davidliu](https://github.com/davidliu))
+- 添加 H265 作为支持的编解码器 - [#742](https://github.com/livekit/client-sdk-android/pull/742) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- E2E reliability for data channels with resending after reconnects - [#738](https://github.com/livekit/client-sdk-android/pull/738) ([@davidliu](https://github.com/davidliu))
+- 数据通道的端到端可靠性，支持重连后重新发送 - [#738](https://github.com/livekit/client-sdk-android/pull/738) ([@davidliu](https://github.com/davidliu))
 
-- Fix default simulcast layers using a lower than intended resolution - [#746](https://github.com/livekit/client-sdk-android/pull/746) ([@davidliu](https://github.com/davidliu))
+- 修复默认 simulcast 层使用低于预期分辨率的问题 - [#746](https://github.com/livekit/client-sdk-android/pull/746) ([@davidliu](https://github.com/davidliu))
 
-- Properly use screenShareTrackPublishDefaults when manually publishing a screenshare track - [#746](https://github.com/livekit/client-sdk-android/pull/746) ([@davidliu](https://github.com/davidliu))
+- 手动发布屏幕共享轨道时正确使用 screenShareTrackPublishDefaults - [#746](https://github.com/livekit/client-sdk-android/pull/746) ([@davidliu](https://github.com/davidliu))
 
 ## 2.19.1
 
-### Patch Changes
+### 补丁变更
 
-- Fixed ProGuard rules to keep JniInit class for WebRTC native registration (#735) - [#736](https://github.com/livekit/client-sdk-android/pull/736) ([@adrian-niculescu](https://github.com/adrian-niculescu))
+- 修复 ProGuard 规则以保留 JniInit 类用于 WebRTC 原生注册 (#735) - [#736](https://github.com/livekit/client-sdk-android/pull/736) ([@adrian-niculescu](https://github.com/adrian-niculescu))
 
 ## 2.19.0
 
-### Minor Changes
+### 次要变更
 
-- Add types for agent and transcription attributes - [#733](https://github.com/livekit/client-sdk-android/pull/733) ([@davidliu](https://github.com/davidliu))
+- 添加 Agent 和转录属性的类型 - [#733](https://github.com/livekit/client-sdk-android/pull/733) ([@davidliu](https://github.com/davidliu))
 
-- Update libwebrtc to 137.7151.01 - [#727](https://github.com/livekit/client-sdk-android/pull/727) ([@davidliu](https://github.com/davidliu))
+- 将 libwebrtc 更新至 137.7151.01 - [#727](https://github.com/livekit/client-sdk-android/pull/727) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- Fix IllegalStateException when switchCamera of localVideoTrack - [#725](https://github.com/livekit/client-sdk-android/pull/725) ([@binkos](https://github.com/binkos))
+- 修复 localVideoTrack 切换摄像头时的 IllegalStateException - [#725](https://github.com/livekit/client-sdk-android/pull/725) ([@binkos](https://github.com/binkos))
 
-- Make blurRadius in the VirtualBackgroundTransformer variable to allow for dynamically changing the value. - [#731](https://github.com/livekit/client-sdk-android/pull/731) ([@binkos](https://github.com/binkos))
+- 使 VirtualBackgroundTransformer 中的 blurRadius 可动态调整。 - [#731](https://github.com/livekit/client-sdk-android/pull/731) ([@binkos](https://github.com/binkos))
 
-- Add sendText and sendFile helper methods to LocalParticipant for ease of use - [#732](https://github.com/livekit/client-sdk-android/pull/732) ([@davidliu](https://github.com/davidliu))
+- 为 LocalParticipant 添加 sendText 和 sendFile 辅助方法以方便使用 - [#732](https://github.com/livekit/client-sdk-android/pull/732) ([@davidliu](https://github.com/davidliu))
 
-- Add default name of "unknown" for StreamByteOptions to allow for no-arg construction - [#732](https://github.com/livekit/client-sdk-android/pull/732) ([@davidliu](https://github.com/davidliu))
+- 为 StreamByteOptions 添加默认名称 "unknown" 以支持无参构造 - [#732](https://github.com/livekit/client-sdk-android/pull/732) ([@davidliu](https://github.com/davidliu))
 
 ## 2.18.3
 
-### Patch Changes
+### 补丁变更
 
-- Move audio handling to background thread to avoid UI freezes. - [#715](https://github.com/livekit/client-sdk-android/pull/715) ([@davidliu](https://github.com/davidliu))
+- 将音频处理移至后台线程以避免 UI 冻结。 - [#715](https://github.com/livekit/client-sdk-android/pull/715) ([@davidliu](https://github.com/davidliu))
 
 ## 2.18.2
 
-### Patch Changes
+### 补丁变更
 
-- Properly return Result on ByteStreamSender convenience methods - [#709](https://github.com/livekit/client-sdk-android/pull/709) ([@davidliu](https://github.com/davidliu))
+- 正确处理 ByteStreamSender 便捷方法的 Result 返回 - [#709](https://github.com/livekit/client-sdk-android/pull/709) ([@davidliu](https://github.com/davidliu))
 
 ## 2.18.1
 
-### Patch Changes
+### 补丁变更
 
-- Fix not being able to publish immediately after connecting - [#706](https://github.com/livekit/client-sdk-android/pull/706) ([@davidliu](https://github.com/davidliu))
+- 修复连接后无法立即发布的问题 - [#706](https://github.com/livekit/client-sdk-android/pull/706) ([@davidliu](https://github.com/davidliu))
 
 ## 2.18.0
 
-### Minor Changes
+### 次要变更
 
-- Refactor some internal data message sending methods to use Result instead of throwing Exceptions to - [#703](https://github.com/livekit/client-sdk-android/pull/703) ([@davidliu](https://github.com/davidliu))
-  fix crashes.
+- 重构部分内部数据消息发送方法，使用 Result 替代抛出异常，以修复崩溃。 - [#703](https://github.com/livekit/client-sdk-android/pull/703) ([@davidliu](https://github.com/davidliu))
 
 ## 2.17.1
 
-### Patch Changes
+### 补丁变更
 
-- Update CameraX dependency to 1.4.2 - [#694](https://github.com/livekit/client-sdk-android/pull/694) ([@davidliu](https://github.com/davidliu))
+- 将 CameraX 依赖更新至 1.4.2 - [#694](https://github.com/livekit/client-sdk-android/pull/694) ([@davidliu](https://github.com/davidliu))
 
-- Avoid a crash on reconnection when a track is disposed - [#691](https://github.com/livekit/client-sdk-android/pull/691) ([@jeankruger](https://github.com/jeankruger))
+- 避免当轨道已被释放时重连导致的崩溃 - [#691](https://github.com/livekit/client-sdk-android/pull/691) ([@jeankruger](https://github.com/jeankruger))
 
 ## 2.17.0
 
-### Minor Changes
+### 次要变更
 
-- Change isMicrophoneEnabled, isCameraEnabled, isScreenshareEnabled to FlowObservable variables - [#685](https://github.com/livekit/client-sdk-android/pull/685) ([@davidliu](https://github.com/davidliu))
+- 将 `isMicrophoneEnabled`、`isCameraEnabled`、`isScreenshareEnabled` 改为 FlowObservable 变量 - [#685](https://github.com/livekit/client-sdk-android/pull/685) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- Fix switchCamera not working if the camera id is physical id - [#676](https://github.com/livekit/client-sdk-android/pull/676) ([@KasemJaffer](https://github.com/KasemJaffer))
+- 修复当摄像头 ID 为物理 ID 时 switchCamera 不生效的问题 - [#676](https://github.com/livekit/client-sdk-android/pull/676) ([@KasemJaffer](https://github.com/KasemJaffer))
 
-- Fix sending pre-connect audio data when byte buffer has backing array - [#678](https://github.com/livekit/client-sdk-android/pull/678) ([@davidliu](https://github.com/davidliu))
+- 修复当 ByteBuffer 有 backing array 时发送预连接音频数据的问题 - [#678](https://github.com/livekit/client-sdk-android/pull/678) ([@davidliu](https://github.com/davidliu))
 
-- Specify default values for StreamTextOptions and streamText - [#688](https://github.com/livekit/client-sdk-android/pull/688) ([@davidliu](https://github.com/davidliu))
+- 为 StreamTextOptions 和 streamText 指定默认值 - [#688](https://github.com/livekit/client-sdk-android/pull/688) ([@davidliu](https://github.com/davidliu))
 
 ## 2.16.0
 
-### Minor Changes
+### 次要变更
 
-- Unorder the lossy data channel - [#665](https://github.com/livekit/client-sdk-android/pull/665) ([@bcherry](https://github.com/bcherry))
+- 将 lossy 数据通道设为无序 - [#665](https://github.com/livekit/client-sdk-android/pull/665) ([@bcherry](https://github.com/bcherry))
 
-- Add pre-connect audio for use with agents - [#666](https://github.com/livekit/client-sdk-android/pull/666) ([@davidliu](https://github.com/davidliu))
+- 添加预连接音频功能，用于 Agent 场景 - [#666](https://github.com/livekit/client-sdk-android/pull/666) ([@davidliu](https://github.com/davidliu))
 
-  See Room.withPreconnectAudio for details.
+  详见 `Room.withPreconnectAudio`。
 
-- CameraX: support for selecting cameras by their physical id - [#668](https://github.com/livekit/client-sdk-android/pull/668) ([@KasemJaffer](https://github.com/KasemJaffer))
+- CameraX: 支持通过物理 ID 选择摄像头 - [#668](https://github.com/livekit/client-sdk-android/pull/668) ([@KasemJaffer](https://github.com/KasemJaffer))
 
-- Add Participant.State and related events - [#666](https://github.com/livekit/client-sdk-android/pull/666) ([@davidliu](https://github.com/davidliu))
+- 添加 Participant.State 及相关事件 - [#666](https://github.com/livekit/client-sdk-android/pull/666) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- Fix NPE when streaming text - [#670](https://github.com/livekit/client-sdk-android/pull/670) ([@davidliu](https://github.com/davidliu))
+- 修复流式传输文本时的 NPE - [#670](https://github.com/livekit/client-sdk-android/pull/670) ([@davidliu](https://github.com/davidliu))
 
-- Add rpc handler methods to Room class for convenience. - [#663](https://github.com/livekit/client-sdk-android/pull/663) ([@davidliu](https://github.com/davidliu))
+- 在 Room 类上添加 RPC handler 方法以方便使用。 - [#663](https://github.com/livekit/client-sdk-android/pull/663) ([@davidliu](https://github.com/davidliu))
 
-- Fix outgoing datastreams incorrectly padding data - [#666](https://github.com/livekit/client-sdk-android/pull/666) ([@davidliu](https://github.com/davidliu))
+- 修复传出数据流错误填充数据的问题 - [#666](https://github.com/livekit/client-sdk-android/pull/666) ([@davidliu](https://github.com/davidliu))
 
 ## 2.15.0
 
-### Minor Changes
+### 次要变更
 
-- Add VirtualBackgroundVideoProcessor and track-processors package - [#660](https://github.com/livekit/client-sdk-android/pull/660) ([@davidliu](https://github.com/davidliu))
+- 添加 VirtualBackgroundVideoProcessor 和 track-processors 包 - [#660](https://github.com/livekit/client-sdk-android/pull/660) ([@davidliu](https://github.com/davidliu))
 
 ## 2.14.3
 
-### Patch Changes
+### 补丁变更
 
-- Fixes disconnect issue - [#656](https://github.com/livekit/client-sdk-android/pull/656) ([@jeankruger](https://github.com/jeankruger))
+- 修复断连问题 - [#656](https://github.com/livekit/client-sdk-android/pull/656) ([@jeankruger](https://github.com/jeankruger))
 
 ## 2.14.2
 
-### Patch Changes
+### 补丁变更
 
-- Fix CameraXSession not setting the target capture format correctly - [#652](https://github.com/livekit/client-sdk-android/pull/652) ([@davidliu](https://github.com/davidliu))
+- 修复 CameraXSession 未正确设置目标采集格式的问题 - [#652](https://github.com/livekit/client-sdk-android/pull/652) ([@davidliu](https://github.com/davidliu))
 
-- Improved handling of track publication failures by introducing a new TrackPublicationFailed event and fixing a broken state issue where the track remained active but inaccessible, causing the microphone or camera to stay on without a published track and leading to unreliable republishing. - [#637](https://github.com/livekit/client-sdk-android/pull/637) ([@jeankruger](https://github.com/jeankruger))
+- 改进轨道发布失败的处理：引入新的 TrackPublicationFailed 事件，修复了轨道保持活跃但不可访问的错误状态问题（该问题导致麦克风或摄像头保持开启却没有已发布的轨道，并导致重新发布不可靠）。 - [#637](https://github.com/livekit/client-sdk-android/pull/637) ([@jeankruger](https://github.com/jeankruger))
 
 ## 2.14.1
 
-### Patch Changes
+### 补丁变更
 
-- Fix ConcurrentModificationException in IncomingDataStreamManager - [#642](https://github.com/livekit/client-sdk-android/pull/642) ([@davidliu](https://github.com/davidliu))
+- 修复 IncomingDataStreamManager 中的 ConcurrentModificationException - [#642](https://github.com/livekit/client-sdk-android/pull/642) ([@davidliu](https://github.com/davidliu))
 
-- Dedupe supported codecs to provide valid SDP - [#643](https://github.com/livekit/client-sdk-android/pull/643) ([@davidliu](https://github.com/davidliu))
+- 去重支持的编解码器以提供有效的 SDP - [#643](https://github.com/livekit/client-sdk-android/pull/643) ([@davidliu](https://github.com/davidliu))
 
 ## 2.14.0
 
-### Minor Changes
+### 次要变更
 
-- Implement data streams feature - [#625](https://github.com/livekit/client-sdk-android/pull/625) ([@davidliu](https://github.com/davidliu))
+- 实现数据流功能 - [#625](https://github.com/livekit/client-sdk-android/pull/625) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- Unpublish the screen sharing track on stop and introduce ScreenCaptureParams to be able to define the notification and set a callback for onStop - [#626](https://github.com/livekit/client-sdk-android/pull/626) ([@jeankruger](https://github.com/jeankruger))
+- 停止时取消发布屏幕共享轨道，并引入 `ScreenCaptureParams`，可配置通知和设置 `onStop` 回调 - [#626](https://github.com/livekit/client-sdk-android/pull/626) ([@jeankruger](https://github.com/jeankruger))
 
 ## 2.13.0
 
-### Minor Changes
+### 次要变更
 
-- Prewarm audio to speed up mic publishing - [#623](https://github.com/livekit/client-sdk-android/pull/623) ([@davidliu](https://github.com/davidliu))
+- 预热音频以加速麦克风发布 - [#623](https://github.com/livekit/client-sdk-android/pull/623) ([@davidliu](https://github.com/davidliu))
 
-- Fast track publication support - [#612](https://github.com/livekit/client-sdk-android/pull/612) ([@davidliu](https://github.com/davidliu))
+- 快速轨道发布支持 - [#612](https://github.com/livekit/client-sdk-android/pull/612) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- Fix publish deadlock when no response from server - [#618](https://github.com/livekit/client-sdk-android/pull/618) ([@davidliu](https://github.com/davidliu))
+- 修复服务端无响应时的发布死锁问题 - [#618](https://github.com/livekit/client-sdk-android/pull/618) ([@davidliu](https://github.com/davidliu))
 
-- Add SCREEN_SHARE_AUDIO as a Track.Source.Type - [#610](https://github.com/livekit/client-sdk-android/pull/610) ([@davidliu](https://github.com/davidliu))
+- 添加 SCREEN_SHARE_AUDIO 作为 Track.Source.Type - [#610](https://github.com/livekit/client-sdk-android/pull/610) ([@davidliu](https://github.com/davidliu))
 
-- Surface canPublishSources, canUpdateMetadata, and canSubscribeMetrics on ParticipantPermission - [#610](https://github.com/livekit/client-sdk-android/pull/610) ([@davidliu](https://github.com/davidliu))
+- 在 ParticipantPermission 上暴露 canPublishSources、canUpdateMetadata 和 canSubscribeMetrics - [#610](https://github.com/livekit/client-sdk-android/pull/610) ([@davidliu](https://github.com/davidliu))
 
-- Fast fail attempts to publish without permissions - [#618](https://github.com/livekit/client-sdk-android/pull/618) ([@davidliu](https://github.com/davidliu))
+- 快速失败：无权限的发布尝试立即拒绝 - [#618](https://github.com/livekit/client-sdk-android/pull/618) ([@davidliu](https://github.com/davidliu))
 
 ## 2.12.3
 
-### Patch Changes
+### 补丁变更
 
-- Fixes deadlock on publish track - [#604](https://github.com/livekit/client-sdk-android/pull/604) ([@jeankruger](https://github.com/jeankruger))
+- 修复发布轨道时的死锁问题 - [#604](https://github.com/livekit/client-sdk-android/pull/604) ([@jeankruger](https://github.com/jeankruger))
 
 ## 2.12.2
 
-### Patch Changes
+### 补丁变更
 
-- Add version number to rpc requests - [#605](https://github.com/livekit/client-sdk-android/pull/605) ([@davidliu](https://github.com/davidliu))
+- 向 RPC 请求添加版本号 - [#605](https://github.com/livekit/client-sdk-android/pull/605) ([@davidliu](https://github.com/davidliu))
 
 ## 2.12.1
 
-### Patch Changes
+### 补丁变更
 
-- Fix documented default of preferredDeviceList in AudioSwitchHandler - [#584](https://github.com/livekit/client-sdk-android/pull/584) ([@davidliu](https://github.com/davidliu))
+- 修正 AudioSwitchHandler 中 preferredDeviceList 的文档默认值 - [#584](https://github.com/livekit/client-sdk-android/pull/584) ([@davidliu](https://github.com/davidliu))
 
-- Allow access to participant field in ParticipantAttributesChanged event - [#591](https://github.com/livekit/client-sdk-android/pull/591) ([@binkos](https://github.com/binkos))
+- 允许在 ParticipantAttributesChanged 事件中访问 participant 字段 - [#591](https://github.com/livekit/client-sdk-android/pull/591) ([@binkos](https://github.com/binkos))
 
 ## 2.12.0
 
-### Minor Changes
+### 次要变更
 
-- Default prioritizing speaker over earpiece - [#579](https://github.com/livekit/client-sdk-android/pull/579) ([@davidliu](https://github.com/davidliu))
+- 默认优先选择扬声器而非听筒 - [#579](https://github.com/livekit/client-sdk-android/pull/579) ([@davidliu](https://github.com/davidliu))
 
-- Implement RPC - [#578](https://github.com/livekit/client-sdk-android/pull/578) ([@davidliu](https://github.com/davidliu))
+- 实现 RPC 功能 - [#578](https://github.com/livekit/client-sdk-android/pull/578) ([@davidliu](https://github.com/davidliu))
 
-- Explicitly expose AudioSwitchHandler from Room for easier audio handling - [#579](https://github.com/livekit/client-sdk-android/pull/579) ([@davidliu](https://github.com/davidliu))
+- 从 Room 显式暴露 AudioSwitchHandler 以方便音频处理 - [#579](https://github.com/livekit/client-sdk-android/pull/579) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- Add publishDTMF method for Sending DTMF signals to SIP Participant - [#576](https://github.com/livekit/client-sdk-android/pull/576) ([@dipak140](https://github.com/dipak140))
+- 添加 publishDTMF 方法，用于向 SIP 参与者发送 DTMF 信号 - [#576](https://github.com/livekit/client-sdk-android/pull/576) ([@dipak140](https://github.com/dipak140))
 
 ## 2.11.1
 
-### Patch Changes
+### 补丁变更
 
-- Fix maxFps not applying for very low framerates - [#573](https://github.com/livekit/client-sdk-android/pull/573) ([@davidliu](https://github.com/davidliu))
+- 修复 maxFps 在极低帧率下不生效的问题 - [#573](https://github.com/livekit/client-sdk-android/pull/573) ([@davidliu](https://github.com/davidliu))
 
 ## 2.11.0
 
-### Minor Changes
+### 次要变更
 
-- Add use cases to CameraX createCameraProvider - [#536](https://github.com/livekit/client-sdk-android/pull/536) ([@KasemJaffer](https://github.com/KasemJaffer))
+- 向 CameraX createCameraProvider 添加 UseCase 参数 - [#536](https://github.com/livekit/client-sdk-android/pull/536) ([@KasemJaffer](https://github.com/KasemJaffer))
 
-- Detect rotation for screenshare tracks - [#552](https://github.com/livekit/client-sdk-android/pull/552) ([@davidliu](https://github.com/davidliu))
+- 为屏幕共享轨道检测旋转 - [#552](https://github.com/livekit/client-sdk-android/pull/552) ([@davidliu](https://github.com/davidliu))
 
-- Default to scaling and cropping camera output to fit desired dimensions - [#558](https://github.com/livekit/client-sdk-android/pull/558) ([@davidliu](https://github.com/davidliu))
+- 默认对摄像头输出进行缩放裁剪以适应目标尺寸 - [#558](https://github.com/livekit/client-sdk-android/pull/558) ([@davidliu](https://github.com/davidliu))
 
-  - This behavior may be turned off through the `VideoCaptureParams.adaptOutputToDimensions`
+  - 可通过 `VideoCaptureParams.adaptOutputToDimensions` 关闭此行为。
 
-- Add separate default capture/publish options for screenshare tracks - [#552](https://github.com/livekit/client-sdk-android/pull/552) ([@davidliu](https://github.com/davidliu))
+- 为屏幕共享轨道添加独立的默认采集/发布选项 - [#552](https://github.com/livekit/client-sdk-android/pull/552) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- Add AudioPresets and increase default audio max bitrate to 48kbps - [#551](https://github.com/livekit/client-sdk-android/pull/551) ([@davidliu](https://github.com/davidliu))
+- 添加 AudioPresets 并将默认音频最大比特率提高到 48kbps - [#551](https://github.com/livekit/client-sdk-android/pull/551) ([@davidliu](https://github.com/davidliu))
 
-- Fix crash when setting publishing layers - [#559](https://github.com/livekit/client-sdk-android/pull/559) ([@davidliu](https://github.com/davidliu))
+- 修复设置发布层时的崩溃 - [#559](https://github.com/livekit/client-sdk-android/pull/559) ([@davidliu](https://github.com/davidliu))
 
-- Added VideoFrameCapturer for pushing video frames directly - [#538](https://github.com/livekit/client-sdk-android/pull/538) ([@davidliu](https://github.com/davidliu))
+- 添加 VideoFrameCapturer，支持直接推送视频帧 - [#538](https://github.com/livekit/client-sdk-android/pull/538) ([@davidliu](https://github.com/davidliu))
 
-- Fix surface causing null pointer exception on some devices - [#544](https://github.com/livekit/client-sdk-android/pull/544) ([@KasemJaffer](https://github.com/KasemJaffer))
+- 修复部分设备上 surface 导致空指针异常的问题 - [#544](https://github.com/livekit/client-sdk-android/pull/544) ([@KasemJaffer](https://github.com/KasemJaffer))
 
-- Update Kotlin dependency to 1.9.25 - [#552](https://github.com/livekit/client-sdk-android/pull/552) ([@davidliu](https://github.com/davidliu))
+- 将 Kotlin 依赖更新至 1.9.25 - [#552](https://github.com/livekit/client-sdk-android/pull/552) ([@davidliu](https://github.com/davidliu))
 
 ## 2.10.0
 
-### Minor Changes
+### 次要变更
 
-- Implement custom audio mixing into audio track - [#528](https://github.com/livekit/client-sdk-android/pull/528) ([@davidliu](https://github.com/davidliu))
+- 实现自定义音频混音到音频轨道中 - [#528](https://github.com/livekit/client-sdk-android/pull/528) ([@davidliu](https://github.com/davidliu))
 
-- Update to webrtc-sdk 125.6422.06.1 - [#528](https://github.com/livekit/client-sdk-android/pull/528) ([@davidliu](https://github.com/davidliu))
+- 更新 webrtc-sdk 到 125.6422.06.1 - [#528](https://github.com/livekit/client-sdk-android/pull/528) ([@davidliu](https://github.com/davidliu))
 
-- Implement screen share audio capturer - [#528](https://github.com/livekit/client-sdk-android/pull/528) ([@davidliu](https://github.com/davidliu))
+- 实现屏幕共享音频采集器 - [#528](https://github.com/livekit/client-sdk-android/pull/528) ([@davidliu](https://github.com/davidliu))
 
 ## 2.9.0
 
-### Minor Changes
+### 次要变更
 
-- Implement LocalAudioTrack.addSink to receive audio data from local mic - [#516](https://github.com/livekit/client-sdk-android/pull/516) ([@davidliu](https://github.com/davidliu))
+- 实现 `LocalAudioTrack.addSink` 以接收本地麦克风的音频数据 - [#516](https://github.com/livekit/client-sdk-android/pull/516) ([@davidliu](https://github.com/davidliu))
 
-- Implement client metrics - [#511](https://github.com/livekit/client-sdk-android/pull/511) ([@davidliu](https://github.com/davidliu))
+- 实现客户端指标 - [#511](https://github.com/livekit/client-sdk-android/pull/511) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- Properly dispose peer connection on RTC thread - [#506](https://github.com/livekit/client-sdk-android/pull/506) ([@davidliu](https://github.com/davidliu))
+- 在 RTC 线程上正确释放 Peer Connection - [#506](https://github.com/livekit/client-sdk-android/pull/506) ([@davidliu](https://github.com/davidliu))
 
-- Documentation updates for LocalParticipant methods - [#510](https://github.com/livekit/client-sdk-android/pull/510) ([@davidliu](https://github.com/davidliu))
+- LocalParticipant 方法的文档更新 - [#510](https://github.com/livekit/client-sdk-android/pull/510) ([@davidliu](https://github.com/davidliu))
 
-- Initialize WebRTC library only once - [#508](https://github.com/livekit/client-sdk-android/pull/508) ([@davidliu](https://github.com/davidliu))
+- 仅初始化 WebRTC 库一次 - [#508](https://github.com/livekit/client-sdk-android/pull/508) ([@davidliu](https://github.com/davidliu))
 
 ## 2.8.1
 
-### Patch Changes
+### 补丁变更
 
-- Fix local video tracks not rendering processed frames - [#495](https://github.com/livekit/client-sdk-android/pull/495) ([@davidliu](https://github.com/davidliu))
+- 修复本地视频轨道不渲染处理后帧的问题 - [#495](https://github.com/livekit/client-sdk-android/pull/495) ([@davidliu](https://github.com/davidliu))
 
-- Add utility class NoDropVideoProcessor to force video processing while not connected - [#495](https://github.com/livekit/client-sdk-android/pull/495) ([@davidliu](https://github.com/davidliu))
+- 添加 NoDropVideoProcessor 工具类，用于在未连接时强制进行视频处理 - [#495](https://github.com/livekit/client-sdk-android/pull/495) ([@davidliu](https://github.com/davidliu))
 
-- More fixes for crashes caused by using disposed track - [#497](https://github.com/livekit/client-sdk-android/pull/497) ([@davidliu](https://github.com/davidliu))
+- 进一步修复使用已释放轨道导致的崩溃 - [#497](https://github.com/livekit/client-sdk-android/pull/497) ([@davidliu](https://github.com/davidliu))
 
 ## 2.8.0
 
-### Minor Changes
+### 次要变更
 
-- Implement LocalTrackSubscribed event - [#489](https://github.com/livekit/client-sdk-android/pull/489) ([@davidliu](https://github.com/davidliu))
+- 实现 LocalTrackSubscribed 事件 - [#489](https://github.com/livekit/client-sdk-android/pull/489) ([@davidliu](https://github.com/davidliu))
 
-- Add first and last received times to TranscriptionSegment - [#485](https://github.com/livekit/client-sdk-android/pull/485) ([@davidliu](https://github.com/davidliu))
+- 向 TranscriptionSegment 添加首次和最后接收时间 - [#485](https://github.com/livekit/client-sdk-android/pull/485) ([@davidliu](https://github.com/davidliu))
 
-### Patch Changes
+### 补丁变更
 
-- More guarding of rtc api usages to prevent crashes - [#488](https://github.com/livekit/client-sdk-android/pull/488) ([@davidliu](https://github.com/davidliu))
+- 进一步保护 RTC API 调用以防止崩溃 - [#488](https://github.com/livekit/client-sdk-android/pull/488) ([@davidliu](https://github.com/davidliu))
 
 ## 2.7.1
 
-### Patch Changes
+### 补丁变更
 
-- Noisily log when a VideoRenderer is used without initializing it first - [#482](https://github.com/livekit/client-sdk-android/pull/482) ([@davidliu](https://github.com/davidliu))
+- 当 VideoRenderer 在未初始化的情况下使用时，以明显级别记录日志 - [#482](https://github.com/livekit/client-sdk-android/pull/482) ([@davidliu](https://github.com/davidliu))
 
-- Fix NPE in RegionProvider when host can't be determined - [#482](https://github.com/livekit/client-sdk-android/pull/482) ([@davidliu](https://github.com/davidliu))
+- 修复 RegionProvider 中无法确定 host 时的 NPE - [#482](https://github.com/livekit/client-sdk-android/pull/482) ([@davidliu](https://github.com/davidliu))

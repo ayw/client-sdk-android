@@ -1,99 +1,89 @@
 # LiveKit Android SDK
 
-## Commands
+## 命令
 
-Supported platforms: Android (minimum API level 21)
+支持的平台：Android（最低 API 级别 21）
 
-- Assemble: `./gradlew assemble`
-- Run tests: `./gradlew test`
-- Run detekt (static analysis): `./gradlew detektDebug`
-- Run detekt with baseline: `./gradlew detektRelease`
-- Install example app: `./gradlew sample-app-compose:installDebug`
+- 构建：`./gradlew assemble`
+- 运行测试：`./gradlew test`
+- 运行 detekt（静态分析）：`./gradlew detektDebug`
+- 运行 detekt 带基线：`./gradlew detektRelease`
+- 安装示例应用：`./gradlew sample-app-compose:installDebug`
 
-## Architecture
+## 架构
 
-The SDK is provided through the `livekit-android-sdk` Gradle module (package root `io.livekit.android`).
+SDK 通过 `livekit-android-sdk` Gradle 模块提供（包根路径为 `io.livekit.android`）。
 
 ```
 livekit-android-sdk/src/main/java/io/livekit/android
-├── annotations/           # Annotations for marking APIs (e.g. @Beta)
+├── annotations/           # API 标记注解（如 @Beta）
 ├── audio/                 # AudioHandler, AudioProcessingController
-├── coroutines/            # Utility methods relating to coroutines
-├── dagger/                # Dependency injection internal to LiveKit SDK
-├── e2ee/                  # End-to-end encryption
+├── coroutines/            # 协程相关工具方法
+├── dagger/                # LiveKit SDK 内部依赖注入
+├── e2ee/                  # 端到端加密
 ├── events/                # RoomEvent, TrackEvent, ParticipantEvent
-├── memory/                # Resource lifecycle helpers
-├── renderer/              # Video render views
+├── memory/                # 资源生命周期辅助工具
+├── renderer/              # 视频渲染视图
 ├── room/                  # Room, SignalClient, RTCEngine, tracks
-│   ├── datastream/        # Incoming/outgoing datastream IO
-│   ├── metrics/           # RTC metrics
-│   ├── network/           # Reconnect and network callbacks
+│   ├── datastream/        # 输入/输出数据流 IO
+│   ├── metrics/           # RTC 指标
+│   ├── network/           # 重连和网络回调
 │   ├── participant/       # LocalParticipant, RemoteParticipant
-│   ├── provisions/        # Internal provisioning helpers
-│   ├── rpc/               # Room-scoped RPC
-│   ├── track/             # Audio/video/screencast tracks and publications
-│   ├── types/             # Shared room-related types
-│   └── util/              # Room-internal utilities
-├── rpc/                   # RPC error types (package-level)
-├── stats/                 # Client/network stats helpers
-├── token/                 # TokenSource implementations for auth
-├── util/                  # Generic utility methods, logging, FlowDelegate
-└── webrtc/                # WebRTC helper classes and extensions
+│   ├── provisions/        # 内部供应辅助工具
+│   ├── rpc/               # 房间级 RPC
+│   ├── track/             # 音频/视频/屏幕采集轨道及其发布
+│   ├── types/             # 共享的房间相关类型
+│   └── util/              # 房间内部工具
+├── rpc/                   # RPC 错误类型（包级别）
+├── stats/                 # 客户端/网络统计辅助工具
+├── token/                 # TokenSource 认证实现
+├── util/                  # 通用工具方法、日志、FlowDelegate
+└── webrtc/                # WebRTC 辅助类和扩展
 ```
 
-Entry types such as `LiveKit` and `ConnectOptions` live in the `io.livekit.android` package alongside these directories.
+入口类（如 `LiveKit` 和 `ConnectOptions`）与上述目录一起放在 `io.livekit.android` 包中。
 
-Key components:
+核心组件：
 
-- `LiveKit` - main entry point; creates a `Room` object.
-- `Room` - primary class that users will interact with; manages connection state, participants, and
-  tracks
-- `Participant` - base class for `LocalParticipant`/`RemoteParticipant`; holds track publications
-- `SignalClient` - WebSocket connection to LiveKit server
-- `FlowDelegate` - provides the consumption of class members marked with `@FlowObservable` as a
-  `Flow` through the `flow` property extension.
+- `LiveKit` - 主入口点；创建 `Room` 对象。
+- `Room` - 用户交互的主要类；管理连接状态、参与者和轨道。
+- `Participant` - `LocalParticipant`/`RemoteParticipant` 的基类；持有轨道发布。
+- `SignalClient` - 与 LiveKit 服务器的 WebSocket 连接。
+- `FlowDelegate` - 将标记为 `@FlowObservable` 的类成员通过 `flow` 扩展属性提供为 `Flow`。
 
 ## WebRTC
 
-WebRTC handles the actual media transport (audio/video/data) between participants. The SDK abstracts
-WebRTC complexity behind `Room`, `Participant`, and `Track` APIs while LiveKit server coordinates
-signaling.
+WebRTC 负责参与方之间的实际媒体传输（音频/视频/数据）。SDK 通过 `Room`、`Participant` 和 `Track` API 封装了 WebRTC 的复杂性，而 LiveKit 服务器负责协调信令。
 
-Key classes:
+核心类：
 
-- `PeerConnectionTransport` - wraps a `PeerConnection`; handles ICE candidates, SDP offer/answer
-- `RTCEngine` - integrates the SignalClient and PeerConnectionTransport into a consolidated
-  connection
-- `io.livekit.android.webrtc` package - convenience extensions on WebRTC types
+- `PeerConnectionTransport` - 封装 `PeerConnection`；处理 ICE 候选、SDP 提议/应答。
+- `RTCEngine` - 将 SignalClient 和 PeerConnectionTransport 整合为统一的连接。
+- `io.livekit.android.webrtc` 包 - WebRTC 类型的便捷扩展。
 
-Threading:
+线程：
 
-- All WebRTC API calls must use `executeOnRTCThread`, `executeBlockingOnRTCThread`, or
-  `launchBlockingOnRTCThread` for thread safety
-- Each call requires a `RTCThreadToken` that manages the thread execution requests
+- 所有 WebRTC API 调用必须使用 `executeOnRTCThread`、`executeBlockingOnRTCThread` 或 `launchBlockingOnRTCThread` 以确保线程安全。
+- 每个调用都需要一个管理线程执行请求的 `RTCThreadToken`。
 
-## Dependency Injection
+## 依赖注入
 
-This library makes extensive use of Dagger to provide dependency injection throughout the codebase.
+此库大量使用 Dagger 来提供整个代码库的依赖注入。
 
-- Dependency needs should be met through injecting into an `@Inject` or `@AssistedInject` annotated
-  constructor
-- Variable dependencies (such as IDs, varying implementations) can be provided through the use of an
-  `@AssistedFactory`
+- 依赖需求应通过注入到 `@Inject` 或 `@AssistedInject` 注解的构造函数中来满足。
+- 可变依赖（如 ID、不同的实现）可以通过 `@AssistedFactory` 注解来提供。
 
 ## FlowObservable
 
-The SDK heavily relies on `@FlowObservable` class members, which allow them to be used as regular variables,
-while also allowing them to be observed as a `Flow`. This is especially useful for Android Compose projects,
-as this allows them to be converted to `State` objects and update the UI appropriately.
+SDK 大量依赖 `@FlowObservable` 修饰的类成员，使它们可以像普通变量一样使用，同时也可以作为 `Flow` 被观察。这对 Android Compose 项目尤其有用，允许将其转换为 `State` 对象以正确更新 UI。
 
 ```kotlin
-val identity = participant.identity // regular access
-val identityFlow = participant::identity.flow // as a flow
-val identityState = participant::identity.flow.collectAsState() // as a state
+val identity = participant.identity // 普通访问
+val identityFlow = participant::identity.flow // 作为 flow
+val identityState = participant::identity.flow.collectAsState() // 作为 state
 ```
 
-A `@FlowObservable` class member can be created using the `flowDelegate` property delegate:
+`@FlowObservable` 类成员可以通过 `flowDelegate` 属性委托创建：
 
 ```kotlin
 @FlowObservable
@@ -101,96 +91,94 @@ A `@FlowObservable` class member can be created using the `flowDelegate` propert
 var identity: Identity? by flowDelegate(identity)
 ```
 
-## Testing
+## 测试
 
-Unit tests are provided through the `livekit-android-test` module.
+单元测试通过 `livekit-android-test` 模块提供。
 
-- `io.livekit.android.test.mock` package - mocks and fakes
-- `MockE2ETest` - the base class for when testing `Room` behavior
+- `io.livekit.android.test.mock` 包 - mock 和 fake。
+- `MockE2ETest` - 测试 `Room` 行为时的基类。
 
-`livekit-android-test` is setup as a friend module to `livekit-android-sdk`, so that internal
-classes may be tested directly. However, avoid usage of internal methods for tests where possible
-in tests.
+`livekit-android-test` 被设置为 `livekit-android-sdk` 的友元模块，可以测试内部类。但测试中应尽量避免直接调用内部方法。
 
-## Using Kotlin
+## 使用 Kotlin
 
-### Concurrency and State
+### 并发与状态
 
-- The SDK uses coroutines for background thread processing.
-- Classes should create and own their own coroutine scope if they use coroutines.
+- SDK 使用协程进行后台线程处理。
+- 使用协程的类应创建并拥有自己的协程作用域。
 
-### Error Handling
+### 错误处理
 
-- Crashing consumer code via unchecked exceptions is **not allowed**
-- `assert()`/`Preconditions` should be avoided
-- Prefer returning `Result` rather than throwing exceptions.
-- Methods that can throw exceptions must be annotated with `@throws` in the documentation.
-- For recoverable errors, consider defensive programming first (retry, backoff, graceful failure)
-- Anticipate invalid states at compile time using algebraic data types, typestates, etc.
+- **不允许**通过未检查的异常导致消费者代码崩溃。
+- 应避免使用 `assert()`/`Preconditions`。
+- 优先返回 `Result` 而非抛出异常。
+- 可能抛出异常的方法必须在文档中使用 `@throws` 标注。
+- 对于可恢复的错误，优先采取防御性编程（重试、退避、优雅降级）。
+- 使用代数数据类型、类型状态等在编译时预判无效状态。
 
-### Coding Style
+### 编码风格
 
-- Follow official Kotlin code style
-- Consistency across features is more important than latest syntactic sugar
-- Run `./gradlew spotless` to check for code style; **do not** introduce new warnings
-- Deprecation warnings are allowed in public APIs; do not fix them
-- `// Code comments` should be used sparingly; prefer better naming/structuring
-- Do not add trivial "what" comments like `// Here is the change`
-- Kdoc comments for **every** public API
-- Add short code examples for new APIs to the entry point (e.g., `Room` class)
-- Use `LKLog` for logging
+- 遵循 Kotlin 官方代码风格。
+- 各功能之间的一致性比最新的语法糖更重要。
+- 运行 `./gradlew spotless` 检查代码风格；**不要**引入新的警告。
+- 公开 API 中的废弃警告是允许的，不要修复它们。
+- `// 代码注释`应尽量少用；优先通过更好的命名/结构来表达。
+- 不要添加无意义的"是什么"注释，如 `// 这里是修改`。
+- **每个**公开 API 都需要 KDoc 注释。
+- 在入口类（如 `Room`）中为新 API 添加简短的代码示例。
+- 使用 `LKLog` 进行日志记录。
 
 <skills_system priority="1">
 
-## Available Skills
+## 可用技能
 
 <!-- SKILLS_TABLE_START -->
 <usage>
-When users ask you to perform tasks, check if any of the available skills below can help complete the task more effectively. Skills provide specialized capabilities and domain knowledge.
+当用户要求你执行任务时，检查以下可用技能是否可以帮助更高效地完成任务。技能提供专门的能力和领域知识。
 
-How to use skills:
+如何使用技能：
 
-- Invoke: `npx openskills read <skill-name>` (run in your shell)
-    - For multiple: `npx openskills read skill-one,skill-two`
-- The skill content will load with detailed instructions on how to complete the task
-- Base directory provided in output for resolving bundled resources (references/, scripts/, assets/)
+- 调用：`npx openskills read <skill-name>`（在 shell 中运行）
+    - 多个：`npx openskills read skill-one,skill-two`
+- 技能内容将加载详细的任务完成说明
+- 输出中提供的基目录用于解析捆绑的资源（references/、scripts/、assets/）
 
-Usage notes:
+使用说明：
 
-- Only use skills listed in <available_skills> below
-- Do not invoke a skill that is already loaded in your context
-- Each skill invocation is stateless
+- 仅使用下面 <available_skills> 中列出的技能
+- 不要调用已经加载到上下文中的技能
+- 每次技能调用都是无状态的
   </usage>
 
 <available_skills>
 
 <skill>
 <name>android-coroutines</name>
-<description>Authoritative rules and patterns for production-quality Kotlin Coroutines onto Android. Covers structured concurrency, lifecycle integration, and reactive streams.</description>
+<description>面向 Android 的生产级 Kotlin 协程的权威规则和模式。涵盖结构化并发、生命周期集成和响应式流。</description>
 <location>project</location>
 </skill>
 
 <skill>
 <name>android-gradle-logic</name>
-<description>Expert guidance on setting up scalable Gradle build logic using Convention Plugins and Version Catalogs.</description>
+<description>使用 Convention Plugins 和 Version Catalogs 搭建可扩展 Gradle 构建逻辑的专家指导。</description>
 <location>project</location>
 </skill>
 
 <skill>
 <name>android-testing</name>
-<description>Comprehensive testing strategy involving Unit, Integration, Hilt, and Screenshot tests.</description>
+<description>涉及单元测试、集成测试、Hilt 测试和截图测试的综合测试策略。</description>
 <location>project</location>
 </skill>
 
 <skill>
 <name>gradle-build-performance</name>
-<description>Debug and optimize Android/Gradle build performance. Use when builds are slow, investigating CI/CD performance, analyzing build scans, or identifying compilation bottlenecks.</description>
+<description>调试和优化 Android/Gradle 构建性能。适用于构建速度慢、分析 CI/CD 性能、分析构建扫描或识别编译瓶颈时。</description>
 <location>project</location>
 </skill>
 
 <skill>
 <name>kotlin-concurrency-expert</name>
-<description>Kotlin Coroutines review and remediation for Android. Use when asked to review concurrency usage, fix coroutine-related bugs, improve thread safety, or resolve lifecycle issues in Kotlin/Android code.</description>
+<description>面向 Android 的 Kotlin 协程审查和修复。适用于审查协程使用、修复协程相关错误、改进线程安全或解决 Kotlin/Android 代码中的生命周期问题。</description>
 <location>project</location>
 </skill>
 

@@ -1,18 +1,19 @@
-# Contributing
-We appreciate any pull requests for changes you may have in mind! Here are some tips and instructions you should follow before we can accept your PR.
+# 贡献指南
 
-* Consult the [Dev Environment](https://github.com/livekit/client-sdk-android?tab=readme-ov-file#dev-environment) instructions for getting the repo set up on your computer. The contained projects may not compile otherwise.
+欢迎你提交任何修改的 PR！在提交 PR 之前，请参考以下注意事项和步骤。
 
-* Add a changeset file which explains the changes contained in the PR.
+* 请参阅[开发环境](https://github.com/livekit/client-sdk-android?tab=readme-ov-file#dev-environment) 说明来搭建本地开发环境。否则项目可能无法正常编译。
 
-  In the root folder, execute the following commands:
+* 需要添加一个 changeset 文件来描述 PR 中包含的变更。
+
+  在项目根目录下，执行以下命令：
   ```
   pnpm install
   pnpm changeset
   ```
 
-  Follow the instructions on screen to create the changeset file.
+  按照屏幕提示完成 changeset 文件的创建。
 
-* Format your code using `./gradlew spotlessApply`.
+* 提交代码前请格式化：`./gradlew spotlessApply`。
 
-* On your first pull request, the CLA Assistant bot will give you a link to sign this project's Contributor License Agreement, required to add your code to the repository. This license is non-optional and we cannot accept any PRs from contributors who have not signed the CLA.
+* 在你首次提交 PR 时，CLA Assistant 机器人会提供一个链接来签署本项目的贡献者许可协议（CLA），这是将代码加入本仓库的必要条件。未签署 CLA 的贡献者所提交的 PR 无法被接受。

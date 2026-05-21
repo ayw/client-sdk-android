@@ -1,10 +1,10 @@
-# Releasing
+# 发布流程
 
-1. In the top-level gradle.properties file, update the `VERSION_NAME` property. This will usually just be removing the `-SNAPSHOT` suffix.
-1. Commit and push changes.
-1. Tag the release: `git tag v[VERSION_NAME]`. Make sure there is a `v` prefix at the front of the tag. This indicates to the CI that this is a release tag.
-1. Push tags: `git push --tags`
-1. Confirm that the `publish` github action is completed successfully.
-1. Add a new GitHub release with change logs.
-1. Prepare the version for the next release by bumping the `VERSION_NAME` property and adding the `-SNAPSHOT` suffix.
-1. Additionally update the version names in README.md.
+1. 在项目根目录的 `gradle.properties` 文件中，更新 `VERSION_NAME` 属性。通常只需要去掉 `-SNAPSHOT` 后缀即可。
+1. 提交并推送变更。
+1. 打标签：`git tag v[VERSION_NAME]`。注意标签前缀必须带 `v`，这会告诉 CI 这是一个发布标签。
+1. 推送标签：`git push --tags`
+1. 确认 `publish` GitHub Action 执行成功。
+1. 在 GitHub 上创建一个新的 Release 并填写更新日志。
+1. 准备下一版本的开发：向上调整 `VERSION_NAME` 并加回 `-SNAPSHOT` 后缀。
+1. 同时更新 `README.md` 中的版本号。
